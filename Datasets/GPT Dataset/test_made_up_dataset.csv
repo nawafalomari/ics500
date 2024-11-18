@@ -1,0 +1,2936 @@
+Smell,Code
+Long Method,"calculatePropertyValue(property) {
+    let baseValue = property.basePrice;
+    let locationMultiplier = 1;
+    if (property.location === ""city center"") {
+        locationMultiplier = 1.5;
+    } else if (property.location === ""suburban"") {
+        locationMultiplier = 1.2;
+    } else if (property.location === ""rural"") {
+        locationMultiplier = 1;
+    }
+
+    let conditionMultiplier = 1;
+    if (property.condition === ""new"") {
+        conditionMultiplier = 1.4;
+    } else if (property.condition === ""good"") {
+        conditionMultiplier = 1.2;
+    } else if (property.condition === ""fair"") {
+        conditionMultiplier = 1;
+    } else if (property.condition === ""poor"") {
+        conditionMultiplier = 0.8;
+    }
+
+    let amenitiesValue = 0;
+    if (property.amenities.includes(""pool"")) {
+        amenitiesValue += 5000;
+    }
+    if (property.amenities.includes(""garage"")) {
+        amenitiesValue += 3000;
+    }
+    if (property.amenities.includes(""garden"")) {
+        amenitiesValue += 2000;
+    }
+    if (property.amenities.includes(""gym"")) {
+        amenitiesValue += 4000;
+    }
+
+    let ageMultiplier = 1;
+    if (property.age < 5) {
+        ageMultiplier = 1.3;
+    } else if (property.age < 10) {
+        ageMultiplier = 1.1;
+    } else if (property.age >= 20) {
+        ageMultiplier = 0.9;
+    }
+
+    let totalValue = baseValue * locationMultiplier * conditionMultiplier * ageMultiplier + amenitiesValue;
+    return totalValue;
+}
+"
+Code Clone,"class Beverage {
+    constructor(name, volume, temperature) {
+        this.name = name;
+        this.volume = volume;
+        this.temperature = temperature;
+    }
+
+    serveCold() {
+        console.log(`Serving ${this.name} at ${this.temperature}°C with ice.`);
+    }
+
+    serveHot() {
+        console.log(`Serving ${this.name} at ${this.temperature}°C. Enjoy while it's hot!`);
+    }
+
+    drink() {
+        console.log(`Drinking ${this.name}, volume: ${this.volume}ml.`);
+    }
+}
+
+class Coffee extends Beverage {
+    constructor(volume, temperature) {
+        super('Coffee', volume, temperature);
+    }
+
+    serveCold() {
+        console.log(`Serving Coffee at ${this.temperature}°C with ice.`);
+    }
+
+    serveHot() {
+        console.log(`Serving Coffee at ${this.temperature}°C. Enjoy while it's hot!`);
+    }
+}
+
+class Tea extends Beverage {
+    constructor(volume, temperature) {
+        super('Tea', volume, temperature);
+    }
+
+    serveCold() {
+        console.log(`Serving Tea at ${this.temperature}°C with ice.`);
+    }
+
+    serveHot() {
+        console.log(`Serving Tea at ${this.temperature}°C. Enjoy while it's hot!`);
+    }
+}
+"
+Code Clone,"public class House {
+    private String address;
+    private int numberOfRooms;
+    private double area;
+
+    public House(String address, int numberOfRooms, double area) {
+        this.address = address;
+        this.numberOfRooms = numberOfRooms;
+        this.area = area;
+    }
+
+    public void printHouseDetails() {
+        System.out.println(""House at "" + address + "" has "" + numberOfRooms + "" rooms and covers an area of "" + area + "" square feet."");
+    }
+
+    public double calculatePropertyTax() {
+        return area * 0.1; // Assume tax is 10% of the area
+    }
+}
+
+public class Apartment {
+    private String address;
+    private int numberOfRooms;
+    private double area;
+
+    public Apartment(String address, int numberOfRooms, double area) {
+        this.address = address;
+        this.numberOfRooms = numberOfRooms;
+        this.area = area;
+    }
+
+    public void printApartmentDetails() {
+        System.out.println(""Apartment at "" + address + "" has "" + numberOfRooms + "" rooms and covers an area of "" + area + "" square feet."");
+    }
+
+    public double calculatePropertyTax() {
+        return area * 0.1; // Assume tax is 10% of the area
+    }
+}
+"
+Data Class,"class User {
+public:
+    std::string username;
+    std::string email;
+    std::string password;
+
+    User(const std::string& user, const std::string& mail, const std::string& pass)
+        : username(user), email(mail), password(pass) {}
+
+    void displayUserInfo() {
+        std::cout << ""Username: "" << username << "", Email: "" << email << std::endl;
+    }
+};
+"
+Feature Envy,"double calculateTotalCost(const Order& order) {
+    double total = 0.0;
+    for (const auto& item : order.getItems()) {
+        total += item.getPrice() * item.getQuantity();
+    }
+    total += order.getTax();
+    total -= order.getDiscount();
+    return total;
+}
+"
+Long Method,"function calculateCropYield(plantingArea, cropType, soilQuality, waterAvailability, fertilizerAmount, pestControlMeasures, weatherConditions, historicalYieldData) {
+    let yieldPerAcre;
+
+    if (cropType === 'corn') {
+        yieldPerAcre = historicalYieldData.corn * soilQuality * waterAvailability * (fertilizerAmount / 100) * (pestControlMeasures ? 1 : 0.8);
+    } else if (cropType === 'wheat') {
+        yieldPerAcre = historicalYieldData.wheat * soilQuality * waterAvailability * (fertilizerAmount / 100) * (pestControlMeasures ? 1 : 0.75);
+    } else if (cropType === 'soybean') {
+        yieldPerAcre = historicalYieldData.soybean * soilQuality * waterAvailability * (fertilizerAmount / 100) * (pestControlMeasures ? 1 : 0.7);
+    }
+
+    let totalYield = yieldPerAcre * plantingArea;
+
+    if (weatherConditions.rainfall < 20) {
+        totalYield *= 0.9; // Reduce yield if rainfall is low
+    } else if (weatherConditions.rainfall > 40) {
+        totalYield *= 1.1; // Increase yield if rainfall is optimal
+    }
+
+    if (weatherConditions.temperatures > 35) {
+        totalYield *= 0.85; // Reduce yield due to high temperatures
+    }
+
+    // Applying historical average adjustments
+    totalYield *= (historicalYieldData.average / 100);
+
+    // Additional adjustments based on new agricultural practices
+    if (fertilizerAmount > 200) {
+        totalYield *= 1.05; // Increase yield for high fertilization
+    }
+
+    if (pestControlMeasures && pestControlMeasures.efficiency < 0.5) {
+        totalYield *= 0.9; // Reduce yield if pest control is ineffective
+    }
+
+    return totalYield;
+}
+"
+Feature Envy,"void printVehicleDetails(const Vehicle& vehicle) {
+    std::cout << ""Vehicle Make: "" << vehicle.getMake() << std::endl;
+    std::cout << ""Vehicle Model: "" << vehicle.getModel() << std::endl;
+    std::cout << ""Vehicle Year: "" << vehicle.getYear() << std::endl;
+    std::cout << ""Vehicle Mileage: "" << vehicle.getMileage() << "" miles"" << std::endl;
+    std::cout << ""Vehicle Color: "" << vehicle.getColor() << std::endl;
+}
+"
+Long Parameter List,"def create_order(customer_id, order_date, shipping_address, billing_address, items, promo_code, gift_wrapping, delivery_instructions, special_requests, preferred_delivery_time):
+    # Implementation of order creation
+    pass
+"
+God Class,"class Movie {
+    constructor(title, director, cast, genre, duration, releaseDate, boxOffice, rating) {
+        this.title = title;
+        this.director = director;
+        this.cast = cast;
+        this.genre = genre;
+        this.duration = duration;
+        this.releaseDate = releaseDate;
+        this.boxOffice = boxOffice;
+        this.rating = rating;
+    }
+
+    calculateBoxOffice() {
+        // logic to calculate box office earnings
+    }
+
+    addCastMember(member) {
+        this.cast.push(member);
+    }
+
+    removeCastMember(member) {
+        this.cast = this.cast.filter(castMember => castMember !== member);
+    }
+
+    getCastList() {
+        return this.cast.join("", "");
+    }
+
+    getMovieInfo() {
+        return `${this.title}, directed by ${this.director}, is a ${this.genre} movie released on ${this.releaseDate}. It has a duration of ${this.duration} minutes and a box office of $${this.boxOffice}. Rating: ${this.rating}/10.`;
+    }
+
+    isHit() {
+        return this.boxOffice > 100000000;
+    }
+
+    updateRating(newRating) {
+        this.rating = newRating;
+    }
+
+    updateReleaseDate(newDate) {
+        this.releaseDate = newDate;
+    }
+
+    updateDuration(newDuration) {
+        this.duration = newDuration;
+    }
+
+    calculateDurationInHours() {
+        return this.duration / 60;
+    }
+
+    // Additional methods for merchandising, sequels, etc.
+    getMerchandisingInfo() {
+        // Return merchandising information for the movie
+    }
+
+    getSequelPotential() {
+        // Analyze the potential for a sequel based on performance
+    }
+
+    // Other business logic related to the movie
+}
+"
+Code Clone,"class Medication {
+    constructor(name, dosage, frequency) {
+        this.name = name;
+        this.dosage = dosage;
+        this.frequency = frequency;
+    }
+
+    scheduleMorningDosage() {
+        return `Take ${this.dosage} of ${this.name} in the morning.`;
+    }
+
+    scheduleAfternoonDosage() {
+        return `Take ${this.dosage} of ${this.name} in the afternoon.`;
+    }
+
+    scheduleEveningDosage() {
+        return `Take ${this.dosage} of ${this.name} in the evening.`;
+    }
+
+    scheduleNightDosage() {
+        return `Take ${this.dosage} of ${this.name} at night.`;
+    }
+}
+"
+Long Method,"void ProcessManufacturingOrder(int orderId) {
+    RetrieveOrderDetails(orderId);
+    ValidateOrder(orderId);
+    SetMachineSettings();
+    StartMachine();
+    RecordStartTime();
+    
+    for (int cycle = 0; cycle < MAX_CYCLES; cycle++) {
+        if (CheckMachineStatus() != OK) {
+            StopMachine();
+            RecordError(orderId);
+            return;
+        }
+        
+        MonitorProductionProgress();
+        
+        if (cycle % 10 == 0) {
+            CollectQualitySamples();
+            PerformQualityControl();
+        }
+        
+        UpdateProductionMetrics();
+        WaitForCycleCompletion();
+    }
+    
+    StopMachine();
+    RecordEndTime();
+    GenerateProductionReport(orderId);
+    NotifyTeamCompletion(orderId);
+}
+"
+God Class,"class TransportationManager {
+    constructor() {
+        this.vehicles = [];
+    }
+
+    addVehicle(vehicle) {
+        this.vehicles.push(vehicle);
+    }
+
+    removeVehicle(vehicle) {
+        const index = this.vehicles.indexOf(vehicle);
+        if (index > -1) {
+            this.vehicles.splice(index, 1);
+        }
+    }
+
+    startVehicles() {
+        this.vehicles.forEach(vehicle => vehicle.start());
+    }
+
+    stopVehicles() {
+        this.vehicles.forEach(vehicle => vehicle.stop());
+    }
+
+    printVehicleDetails() {
+        this.vehicles.forEach(vehicle => {
+            console.log(`Vehicle Type: ${vehicle.type}, Speed: ${vehicle.speed}`);
+        });
+    }
+
+    findVehicleByType(type) {
+        return this.vehicles.filter(vehicle => vehicle.type === type);
+    }
+
+    calculateTotalSpeed() {
+        return this.vehicles.reduce((total, vehicle) => total + vehicle.speed, 0);
+    }
+
+    manageRoute(route) {
+        // logic to manage route for all vehicles
+    }
+
+    handleAccident(vehicle, details) {
+        // handle accident details for vehicle
+    }
+
+    scheduleMaintenance(vehicle) {
+        // schedule maintenance for vehicle
+    }
+
+    trackFuelConsumption(vehicle) {
+        // logic to track fuel consumption for vehicle
+    }
+}
+"
+Long Method,"def process_energy_data(data):
+    total_energy = 0
+    max_energy = 0
+    min_energy = float('inf')
+    energy_readings = []
+    
+    for record in data:
+        timestamp = record['timestamp']
+        energy = record['energy']
+        if energy < 0:
+            continue
+        total_energy += energy
+        energy_readings.append(energy)
+        if energy > max_energy:
+            max_energy = energy
+        if energy < min_energy:
+            min_energy = energy
+        
+        # Perform additional calculation
+        adjusted_energy = energy * 0.9  # Apply some adjustment
+        if adjusted_energy > 50:
+            adjusted_energy += 10
+        
+        energy_readings.append(adjusted_energy)
+    
+    average_energy = total_energy / len(data) if data else 0
+    report = {
+        ""total_energy"": total_energy,
+        ""average_energy"": average_energy,
+        ""max_energy"": max_energy,
+        ""min_energy"": min_energy,
+        ""energy_readings"": energy_readings
+    }
+    
+    # Log report
+    print(""Energy Report: "", report)
+    return report
+"
+Code Clone,"class Hotel {
+    constructor(name, location, rooms) {
+        this.name = name;
+        this.location = location;
+        this.rooms = rooms;
+    }
+
+    checkAvailability(startDate, endDate) {
+        for (let room of this.rooms) {
+            if (room.isAvailable(startDate, endDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bookRoom(roomNumber, startDate, endDate) {
+        for (let room of this.rooms) {
+            if (room.number === roomNumber && room.isAvailable(startDate, endDate)) {
+                room.book(startDate, endDate);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    getRoomDetails(roomNumber) {
+        for (let room of this.rooms) {
+            if (room.number === roomNumber) {
+                return room.getDetails();
+            }
+        }
+        return null;
+    }
+}
+
+class Resort {
+    constructor(name, location, rooms) {
+        this.name = name;
+        this.location = location;
+        this.rooms = rooms;
+    }
+
+    checkAvailability(startDate, endDate) {
+        for (let room of this.rooms) {
+            if (room.isAvailable(startDate, endDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bookRoom(roomNumber, startDate, endDate) {
+        for (let room of this.rooms) {
+            if (room.number === roomNumber && room.isAvailable(startDate, endDate)) {
+                room.book(startDate, endDate);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    getRoomDetails(roomNumber) {
+        for (let room of this.rooms) {
+            if (room.number === roomNumber) {
+                return room.getDetails();
+            }
+        }
+        return null;
+    }
+}
+"
+Long Method,"public void processOrder(Order order) {
+    if (order == null || order.getItems().isEmpty()) {
+        throw new IllegalArgumentException(""Order cannot be null or empty"");
+    }
+    
+    Customer customer = order.getCustomer();
+    if (customer == null) {
+        throw new IllegalArgumentException(""Customer cannot be null"");
+    }
+
+    double total = 0.0;
+    for (OrderItem item : order.getItems()) {
+        Product product = item.getProduct();
+        if (product == null || product.getPrice() <= 0) {
+            throw new IllegalArgumentException(""Invalid product in order"");
+        }
+        
+        total += product.getPrice() * item.getQuantity();
+    }
+
+    double discount = 0.0;
+    if (customer.isLoyal()) {
+        discount = total * 0.1; // 10% loyalty discount
+    }
+
+    total -= discount;
+
+    if (total > customer.getCreditLimit()) {
+        throw new IllegalArgumentException(""Total exceeds customer's credit limit"");
+    }
+
+    Payment payment = order.getPayment();
+    if (payment == null || !payment.isValid()) {
+        throw new IllegalArgumentException(""Invalid payment method"");
+    }
+    
+    InventoryService inventoryService = InventoryService.getInstance();
+    for (OrderItem item : order.getItems()) {
+        if (!inventoryService.isItemAvailable(item.getProduct().getId(), item.getQuantity())) {
+            throw new IllegalArgumentException(""Insufficient inventory for product: "" + item.getProduct().getName());
+        }
+    }
+
+    for (OrderItem item : order.getItems()) {
+        inventoryService.deductInventory(item.getProduct().getId(), item.getQuantity());
+    }
+
+    order.setTotal(total);
+    order.setStatus(OrderStatus.PROCESSED);
+
+    // Notify customer
+    NotificationService notificationService = NotificationService.getInstance();
+    notificationService.sendOrderConfirmation(customer.getEmail(), order);
+
+    // Log order processing
+    Logger log = Logger.getInstance();
+    log.info(""Order processed successfully for customer: "" + customer.getId());
+}
+"
+Data Class,"public class PolicyHolder {
+    private String name;
+    private String address;
+    private String phoneNumber;
+    private String email;
+
+    public PolicyHolder(String name, String address, String phoneNumber, String email) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+}
+"
+Code Clone,"class SolarPanel:
+    def __init__(self, capacity, efficiency):
+        self.capacity = capacity
+        self.efficiency = efficiency
+
+    def calculate_output(self, sunlight_hours):
+        return self.capacity * self.efficiency * sunlight_hours
+
+class WindTurbine:
+    def __init__(self, capacity, efficiency):
+        self.capacity = capacity
+        self.efficiency = efficiency
+
+    def calculate_output(self, wind_speed, hours):
+        return self.capacity * self.efficiency * wind_speed * hours
+
+class HydroPower:
+    def __init__(self, capacity, efficiency):
+        self.capacity = capacity
+        self.efficiency = efficiency
+
+    def calculate_output(self, water_flow, hours):
+        return self.capacity * self.efficiency * water_flow * hours
+"
+Code Clone,"public class DiscountCalculator {
+    private double totalAmount;
+
+    public DiscountCalculator(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public double calculateSeasonalDiscount() {
+        if (totalAmount > 100) {
+            return totalAmount * 0.1; // 10% discount
+        } else {
+            return 0;
+        }
+    }
+
+    public double calculateClearanceDiscount() {
+        if (totalAmount > 100) {
+            return totalAmount * 0.15; // 15% discount
+        } else {
+            return 0;
+        }
+    }
+
+    public double calculateLoyaltyDiscount() {
+        if (totalAmount > 100) {
+            return totalAmount * 0.2; // 20% discount
+        } else {
+            return 0;
+        }
+    }
+
+    public double calculatePromotionalDiscount() {
+        if (totalAmount > 100) {
+            return totalAmount * 0.25; // 25% discount
+        } else {
+            return 0;
+        }
+    }
+}
+"
+Long Parameter List,"def calculate_investment_return(principal, rate_of_return, time_period, inflation_rate, tax_rate, additional_contributions, contribution_frequency, market_conditions, currency_conversion_rate):
+    # Logic to calculate investment return
+    gross_return = principal * (1 + rate_of_return) ** time_period
+    net_return = gross_return - (gross_return * tax_rate) + additional_contributions * contribution_frequency * time_period
+    adjusted_return = net_return - (net_return * inflation_rate)
+    return adjusted_return * currency_conversion_rate
+"
+Long Method,"calculateFuelEfficiency(distance, fuelUsed) {
+    const efficiency = distance / fuelUsed;
+    let efficiencyCategory;
+
+    if (efficiency > 25) {
+        efficiencyCategory = 'Excellent';
+    } else if (efficiency > 20) {
+        efficiencyCategory = 'Good';
+    } else if (efficiency > 15) {
+        efficiencyCategory = 'Average';
+    } else if (efficiency > 10) {
+        efficiencyCategory = 'Poor';
+    } else {
+        efficiencyCategory = 'Very Poor';
+    }
+
+    const efficiencyMessage = `The vehicle has a fuel efficiency of ${efficiency.toFixed(2)} miles per gallon, which is considered ${efficiencyCategory}.`;
+    
+    const fuelCost = fuelUsed * this.getCurrentFuelPrice();
+    const distanceTraveled = distance;
+    
+    let maintenanceSuggestion = '';
+    if (distanceTraveled > 10000) {
+        maintenanceSuggestion = 'Consider scheduling a maintenance check soon.';
+    } else {
+        maintenanceSuggestion = 'Your vehicle is in good condition.';
+    }
+    
+    const performanceMetric = `Fuel used: ${fuelUsed} gallons, Distance: ${distanceTraveled} miles, Fuel cost: $${fuelCost.toFixed(2)}`;
+
+    console.log(efficiencyMessage);
+    console.log(performanceMetric);
+    console.log(maintenanceSuggestion);
+}
+"
+Long Parameter List,"void ConfigureNetwork(const std::string& ipAddress, int port, bool useDHCP, const std::string& subnetMask, const std::string& gateway, const std::string& dns1, const std::string& dns2, int timeout, const std::string& hostname) {
+    // Method implementation
+}
+"
+Long Method,"async function processOrder(order) {
+    if (!order || !order.items || order.items.length === 0) {
+        throw new Error(""Invalid order"");
+    }
+
+    const user = await getUser(order.userId);
+    if (!user) {
+        throw new Error(""User not found"");
+    }
+
+    let totalAmount = 0;
+    for (const item of order.items) {
+        const product = await getProduct(item.productId);
+        if (!product) {
+            throw new Error(`Product not found: ${item.productId}`);
+        }
+        if (product.stock < item.quantity) {
+            throw new Error(`Insufficient stock for product: ${item.productId}`);
+        }
+        totalAmount += product.price * item.quantity;
+        await updateStock(product.id, product.stock - item.quantity);
+    }
+
+    const transaction = await createTransaction(user.id, totalAmount);
+    if (!transaction) {
+        throw new Error(""Transaction failed"");
+    }
+
+    await sendConfirmationEmail(user.email, transaction.id);
+
+    const promoCode = order.promoCode;
+    if (promoCode) {
+        const discount = await applyPromoCode(promoCode, totalAmount);
+        totalAmount -= discount;
+    }
+
+    await finalizeOrder(order.id, totalAmount, transaction.id);
+    await updateUserOrderHistory(user.id, order.id);
+    
+    return {
+        success: true,
+        orderId: order.id,
+        totalAmount: totalAmount,
+        transactionId: transaction.id
+    };
+}
+"
+Data Class,"class Drug {
+    constructor(name, dosage, manufacturer, sideEffects, indications) {
+        this.name = name;
+        this.dosage = dosage;
+        this.manufacturer = manufacturer;
+        this.sideEffects = sideEffects;
+        this.indications = indications;
+    }
+}
+"
+Long Method,"function createMovie(title, director, releaseYear, genre, cast, duration, budget, boxOffice, synopsis, rating, awards) {
+    const movie = {
+        title: title,
+        director: director,
+        releaseYear: releaseYear,
+        genre: genre,
+        cast: cast,
+        duration: duration,
+        budget: budget,
+        boxOffice: boxOffice,
+        synopsis: synopsis,
+        rating: rating,
+        awards: awards
+    };
+
+    if (rating > 8) {
+        movie.recommendation = ""Highly Recommended"";
+    } else if (rating > 5) {
+        movie.recommendation = ""Recommended"";
+    } else {
+        movie.recommendation = ""Not Recommended"";
+    }
+
+    if (awards.length > 0) {
+        movie.awardStatus = ""Award-Winning"";
+    } else {
+        movie.awardStatus = ""No Awards"";
+    }
+
+    console.log(`Movie Created: ${title}`);
+    console.log(`Director: ${director}`);
+    console.log(`Release Year: ${releaseYear}`);
+    console.log(`Genre: ${genre}`);
+    console.log(`Cast: ${cast.join(', ')}`);
+    console.log(`Duration: ${duration} minutes`);
+    console.log(`Budget: $${budget}`);
+    console.log(`Box Office: $${boxOffice}`);
+    console.log(`Synopsis: ${synopsis}`);
+    console.log(`Rating: ${rating}/10`);
+    console.log(`Awards: ${awards.length > 0 ? awards.join(', ') : 'None'}`);
+    console.log(`Recommendation: ${movie.recommendation}`);
+    console.log(`Award Status: ${movie.awardStatus}`);
+
+    // Perform additional logic for creating and storing the movie
+    // This could involve database operations, API calls, etc.
+
+    return movie;
+}
+"
+Long Method,"void RealEstateAgent::processPropertyListing(const Property& property) {
+    std::string formattedDetails;
+    formattedDetails += ""Property ID: "" + std::to_string(property.id) + ""\n"";
+    formattedDetails += ""Address: "" + property.address + ""\n"";
+    formattedDetails += ""Price: $"" + std::to_string(property.price) + ""\n"";
+    formattedDetails += ""Bedrooms: "" + std::to_string(property.bedrooms) + ""\n"";
+    formattedDetails += ""Bathrooms: "" + std::to_string(property.bathrooms) + ""\n"";
+    formattedDetails += ""Square Feet: "" + std::to_string(property.squareFeet) + ""\n"";
+    
+    if (property.hasGarage) {
+        formattedDetails += ""Garage: Yes\n"";
+    } else {
+        formattedDetails += ""Garage: No\n"";
+    }
+
+    if (property.isPoolAvailable) {
+        formattedDetails += ""Pool: Yes\n"";
+    } else {
+        formattedDetails += ""Pool: No\n"";
+    }
+
+    formattedDetails += ""Year Built: "" + std::to_string(property.yearBuilt) + ""\n"";
+
+    if (property.isAvailable) {
+        formattedDetails += ""Status: Available\n"";
+        formattedDetails += ""Open House Dates: \n"";
+        for (const auto& date : property.openHouseDates) {
+            formattedDetails += ""- "" + date + ""\n"";
+        }
+    } else {
+        formattedDetails += ""Status: Sold\n"";
+    }
+
+    // More processing that might include client follow-up, email notifications, etc.
+    sendEmailNotification(formattedDetails);
+    logPropertyListing(property.id);
+    updateMarketTrends(property);
+    handleClientInquiries(property);
+
+    // Potentially more logic...
+}
+"
+Data Class,"class CallDetails {
+public:
+    std::string callerNumber;
+    std::string receiverNumber;
+    std::string startTime;
+    std::string endTime;
+    double duration;
+    double cost;
+
+    CallDetails(std::string caller, std::string receiver, std::string start, std::string end, double dur, double cst)
+        : callerNumber(caller), receiverNumber(receiver), startTime(start), endTime(end), duration(dur), cost(cst) {}
+
+    void printDetails() {
+        std::cout << ""Caller: "" << callerNumber << "", Receiver: "" << receiverNumber
+                  << "", Start Time: "" << startTime << "", End Time: "" << endTime
+                  << "", Duration: "" << duration << "" seconds, Cost: $"" << cost << std::endl;
+    }
+};
+"
+Long Parameter List,"def create_construction_project(name, location, budget, start_date, end_date, project_manager, team_members, materials_list, permits_required, risk_assessment, project_scope, payment_schedule):
+    # Method implementation
+    pass
+"
+Feature Envy,"def calculate_order_total(order):
+    total = 0
+    for item in order.items:
+        total += item.price * item.quantity
+        total += item.get_tax()  # Feature Envy: relying on item methods
+    return total
+"
+Long Parameter List,"public void processTransaction(Long transactionId, Long accountId, Long amount, Long currencyId, Long timestamp, Long fee, Long discount, Long balanceAfterTransaction, Long userId) {
+    // Implement transaction processing logic here
+}
+"
+God Class,"class EducationSystem {
+public:
+    void enrollStudent(int studentId, const std::string& course) {
+        // Logic to enroll a student
+    }
+
+    void removeStudent(int studentId) {
+        // Logic to remove a student
+    }
+
+    void assignGrade(int studentId, const std::string& course, char grade) {
+        // Logic to assign grade
+    }
+
+    void generateTranscript(int studentId) {
+        // Logic to generate transcript
+    }
+
+    void scheduleClass(const std::string& course, const std::string& dateTime) {
+        // Logic to schedule a class
+    }
+
+    void notifyStudents(const std::string& message) {
+        // Logic to notify all students
+    }
+
+    void addCourse(const std::string& courseName) {
+        // Logic to add a new course
+    }
+
+    void removeCourse(const std::string& courseName) {
+        // Logic to remove a course
+    }
+
+    void handleFinancialAid(int studentId, double amount) {
+        // Logic to handle financial aid
+    }
+
+    void conductSurvey(const std::string& surveyDetails) {
+        // Logic to conduct a survey
+    }
+
+    void reportAttendance(int studentId, const std::string& course) {
+        // Logic to report attendance
+    }
+
+private:
+    std::vector<int> enrolledStudents;
+    std::map<int, std::vector<std::string>> studentCourses;
+    // Additional data members...
+};
+"
+Long Parameter List,"def configure_vehicle(specs, color, engine_type, fuel_type, transmission, num_doors, tire_size, audio_system, interior_material, driver_assistance, warranty_period, insurance_provider):
+    # Configuration logic here
+    pass
+"
+Long Parameter List,"public void bookRoom(Long guestId, Long roomId, Long checkInDate, Long checkOutDate, Long paymentMethodId, Long numberOfGuests, Long specialRequestsId, Long promotionalCodeId) {
+    // Booking logic here
+}
+"
+Long Method,"void processCallData(CallData& data) {
+    if (data.isEmergency()) {
+        notifyEmergencyServices(data);
+    } else if (data.isInternational()) {
+        chargeInternationalRates(data);
+        logInternationalCall(data);
+    } else {
+        if (data.isVoicemail()) {
+            handleVoicemail(data);
+        } else {
+            if (data.isRoaming()) {
+                applyRoamingCharges(data);
+            }
+            logCall(data);
+            updateBillingRecords(data);
+            if (data.hasFeaturesEnabled()) {
+                applyAdditionalFeatures(data);
+            }
+            updateCustomerProfile(data);
+            if (data.isConferenceCall()) {
+                manageConferenceParticipants(data);
+            }
+            generateCallSummary(data);
+            if (data.isDataUsageExceeded()) {
+                notifyDataLimitExceeded(data);
+            }
+            if (data.shouldRecordCall()) {
+                recordCall(data);
+            }
+        }
+    }
+    updateCallStatistics(data);
+    sendFeedbackRequest(data);
+    archiveCallData(data);
+}
+"
+God Class,"public class VehicleController {
+    private Engine engine;
+    private Transmission transmission;
+    private Brakes brakes;
+    private FuelSystem fuelSystem;
+    private NavigationSystem navigationSystem;
+    private InfotainmentSystem infotainmentSystem;
+
+    public VehicleController() {
+        this.engine = new Engine();
+        this.transmission = new Transmission();
+        this.brakes = new Brakes();
+        this.fuelSystem = new FuelSystem();
+        this.navigationSystem = new NavigationSystem();
+        this.infotainmentSystem = new InfotainmentSystem();
+    }
+
+    public void startVehicle() {
+        engine.start();
+        transmission.engage();
+        fuelSystem.openValve();
+        infotainmentSystem.powerOn();
+    }
+
+    public void stopVehicle() {
+        brakes.apply();
+        engine.stop();
+        transmission.disengage();
+        infotainmentSystem.powerOff();
+    }
+
+    public void navigateTo(String destination) {
+        navigationSystem.setDestination(destination);
+        infotainmentSystem.showMap(navigationSystem.getMap());
+    }
+
+    public void refuel(int amount) {
+        fuelSystem.refill(amount);
+    }
+
+    public void playMedia(String media) {
+        infotainmentSystem.play(media);
+    }
+
+    public void checkSystemStatus() {
+        engine.checkStatus();
+        transmission.checkStatus();
+        brakes.checkStatus();
+        fuelSystem.checkStatus();
+        navigationSystem.checkStatus();
+        infotainmentSystem.checkStatus();
+    }
+}
+"
+Long Parameter List,"def calculate_crop_yield(planting_date, harvest_date, soil_type, irrigation_method, fertilizer_type, crop_variety,
+                          pest_control_method, average_rainfall, temperature_range, light_exposure,
+                          field_area, farmer_experience, market_conditions):
+    # Implementation of yield calculation goes here
+    pass
+"
+Data Class,"from dataclasses import dataclass
+
+@dataclass
+class Shipment:
+    shipment_id: str
+    origin: str
+    destination: str
+    weight: float
+    dimensions: tuple
+    status: str
+
+    def update_status(self, new_status: str):
+        self.status = new_status
+
+    def calculate_shipping_cost(self):
+        # Simplified cost calculation based on weight
+        return self.weight * 1.5
+"
+Code Clone,"class Product {
+    constructor(id, name, price, category) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+    }
+
+    calculateDiscount(percent) {
+        return this.price - (this.price * (percent / 100));
+    }
+
+    calculateTax(rate) {
+        return this.price * (rate / 100);
+    }
+}
+
+class Service {
+    constructor(id, name, price, category) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+    }
+
+    calculateDiscount(percent) {
+        return this.price - (this.price * (percent / 100));
+    }
+
+    calculateTax(rate) {
+        return this.price * (rate / 100);
+    }
+}
+"
+God Class,"class FinancialManager {
+public:
+    void calculateInterest(double principal, double rate, int time) {
+        double interest = (principal * rate * time) / 100;
+        // Additional code to update a database or report the interest
+    }
+
+    void generateReport() {
+        // Complex logic to fetch data from various sources and generate financial reports
+    }
+
+    void processTransaction(int transactionId) {
+        // Logic to process transactions including checks for various business rules
+    }
+
+    void reconcileAccounts() {
+        // Code to reconcile different financial accounts
+    }
+
+    void auditAccounts() {
+        // Complex auditing logic involving multiple business units
+    }
+
+    void manageInvestments() {
+        // Involves multiple investment strategies and calculations for efficiency
+    }
+
+    void handleEmployeePayroll(int employeeId) {
+        // Payroll calculations, tax deductions, benefits management
+    }
+    
+    void assessFinancialRisk(double valueAtRisk) {
+        // Risk assessment logic
+    }
+
+    void strategizeBudgetAllocation(double totalBudget) {
+        // Budgeting strategy involving multiple departments
+    }
+
+    void manageCompliance() {
+        // Overseeing and ensuring compliance with financial regulations
+    }
+};
+"
+Long Parameter List,"public void createConstructionProject(Long projectId, Long clientId, Long siteId, Long managerId, Long budgetId, Long startDateId, Long endDateId, Long resourceId) {
+    // Method implementation goes here
+}
+"
+Feature Envy,"calculateTotalPrice() {
+    const basePrice = this.property.basePrice;
+    const commission = this.agent.getCommission();
+    const taxes = this.agent.calculateTaxes(this.property);
+    return basePrice + commission + taxes;
+}
+"
+Feature Envy,"public void printStudentDetails(Student student) {
+    System.out.println(""Name: "" + student.getName());
+    System.out.println(""Age: "" + student.getAge());
+    System.out.println(""Grade: "" + student.getGrade());
+    System.out.println(""GPA: "" + student.getGPA());
+    System.out.println(""Courses: "" + student.getCourses().stream().collect(Collectors.joining("", "")));
+}
+"
+God Class,"public class Patient {
+    private String name;
+    private int age;
+    private String gender;
+    private String medicalHistory;
+    private String allergies;
+    private String medications;
+    private double height;
+    private double weight;
+    private String insuranceDetails;
+    
+    public void scheduleAppointment(String date, String time, String doctor) {
+        // Schedule appointment logic
+    }
+    
+    public void cancelAppointment(String appointmentId) {
+        // Cancel appointment logic
+    }
+    
+    public void updateMedicalHistory(String newHistory) {
+        this.medicalHistory += newHistory;
+    }
+
+    public void addAllergy(String allergy) {
+        this.allergies += "","" + allergy;
+    }
+
+    public void prescribeMedication(String medication) {
+        this.medications += "","" + medication;
+    }
+
+    public void checkVitals(double bloodPressure, double heartRate, double temperature) {
+        // Check vitals logic
+    }
+
+    public void printPatientSummary() {
+        // Print patient's complete medical summary
+    }
+    
+    public void billPatient(double amount) {
+        // Billing logic
+    }
+
+    public void handleInsuranceClaim(String claimId) {
+        // Handle insurance claim logic
+    }
+
+    public void provideCounseling(String message) {
+        // Provide counseling to the patient
+    }
+
+    public void generateReferral(String specialist) {
+        // Generate a referral to a specialist
+    }
+
+    // Getters and Setters
+}
+"
+Long Method,"public void processOrder(Order order) {
+    try {
+        validateOrder(order);
+        Customer customer = findCustomer(order.getCustomerId());
+        if (customer == null) {
+            throw new IllegalArgumentException(""Customer not found."");
+        }
+
+        List<Item> items = order.getItems();
+        for (Item item : items) {
+            Product product = productRepository.findById(item.getProductId());
+            if (product == null || !product.isAvailable()) {
+                throw new IllegalArgumentException(""Product not available: "" + item.getProductId());
+            }
+
+            if (item.getQuantity() > product.getStock()) {
+                throw new IllegalArgumentException(""Insufficient stock for product: "" + item.getProductId());
+            }
+
+            product.setStock(product.getStock() - item.getQuantity());
+            productRepository.save(product);
+        }
+
+        Payment payment = paymentService.processPayment(customer, order.getTotal());
+        if (!payment.isSuccessful()) {
+            throw new IllegalStateException(""Payment failed for order: "" + order.getId());
+        }
+
+        order.setStatus(OrderStatus.COMPLETED);
+        orderRepository.save(order);
+        notificationService.sendOrderConfirmation(customer.getEmail(), order);
+    } catch (Exception e) {
+        // log the error
+        order.setStatus(OrderStatus.FAILED);
+        orderRepository.save(order);
+        throw e;
+    }
+}
+"
+God Class,"class HotelManagementSystem:
+    def __init__(self):
+        self.rooms = []
+        self.reservations = []
+        self.customers = []
+
+    def add_room(self, room_number, bed_count, is_available=True):
+        self.rooms.append({'room_number': room_number, 'bed_count': bed_count, 'is_available': is_available})
+
+    def make_reservation(self, customer_name, room_number, check_in_date, check_out_date):
+        if self.is_room_available(room_number):
+            reservation = {
+                'customer_name': customer_name,
+                'room_number': room_number,
+                'check_in_date': check_in_date,
+                'check_out_date': check_out_date
+            }
+            self.reservations.append(reservation)
+            self.update_room_availability(room_number, False)
+            return reservation
+        else:
+            raise Exception(""Room not available"")
+
+    def cancel_reservation(self, reservation):
+        self.reservations.remove(reservation)
+        self.update_room_availability(reservation['room_number'], True)
+
+    def is_room_available(self, room_number):
+        for room in self.rooms:
+            if room['room_number'] == room_number:
+                return room['is_available']
+        return False
+
+    def update_room_availability(self, room_number, is_available):
+        for room in self.rooms:
+            if room['room_number'] == room_number:
+                room['is_available'] = is_available
+
+    def check_in_customer(self, customer_name, room_number):
+        for reservation in self.reservations:
+            if reservation['customer_name'] == customer_name and reservation['room_number'] == room_number:
+                print(f""{customer_name} checked in to room {room_number}."")
+                return
+        print(""No reservation found for this customer."")
+
+    def check_out_customer(self, customer_name, room_number):
+        self.cancel_reservation(next(res for res in self.reservations if res['customer_name'] == customer_name and res['room_number'] == room_number))
+        print(f""{customer_name} checked out of room {room_number}."")
+
+    def get_customer_history(self, customer_name):
+        history = []
+        for res in self.reservations:
+            if res['customer_name'] == customer_name:
+                history.append(res)
+        return history
+
+    def get_available_rooms(self):
+        return [room for room in self.rooms if room['is_available']]
+"
+Long Parameter List,"def process_order(order_id, user_id, item_list, shipping_address, billing_address, payment_info, discount_code, customer_notes):
+    # Process the order with the provided information
+    pass
+"
+Code Clone,"class Patient {
+public:
+    Patient(std::string name, int age, std::string gender) 
+        : name(name), age(age), gender(gender) {}
+
+    void displayPatientInfo() {
+        std::cout << ""Name: "" << name << std::endl;
+        std::cout << ""Age: "" << age << std::endl;
+        std::cout << ""Gender: "" << gender << std::endl;
+    }
+
+    void prescribeMedicationA() {
+        std::cout << ""Prescribing Medication A for "" << name << std::endl;
+    }
+
+    void prescribeMedicationB() {
+        std::cout << ""Prescribing Medication B for "" << name << std::endl;
+    }
+
+private:
+    std::string name;
+    int age;
+    std::string gender;
+};
+
+class Doctor {
+public:
+    Doctor(std::string name, std::string specialty) 
+        : name(name), specialty(specialty) {}
+
+    void displayDoctorInfo() {
+        std::cout << ""Name: "" << name << std::endl;
+        std::cout << ""Specialty: "" << specialty << std::endl;
+    }
+
+    void prescribeMedicationA(const Patient& patient) {
+        std::cout << ""Dr. "" << name << "" prescribing Medication A for "" << patient.getName() << std::endl;
+    }
+
+    void prescribeMedicationB(const Patient& patient) {
+        std::cout << ""Dr. "" << name << "" prescribing Medication B for "" << patient.getName() << std::endl;
+    }
+
+private:
+    std::string name;
+    std::string specialty;
+};
+"
+Data Class,"public class Patient {
+    private String id;
+    private String name;
+    private String address;
+    private String phoneNumber;
+    private String dateOfBirth;
+    private String medicalHistory;
+
+    public Patient(String id, String name, String address, String phoneNumber, String dateOfBirth, String medicalHistory) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.medicalHistory = medicalHistory;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getMedicalHistory() {
+        return medicalHistory;
+    }
+}
+"
+Data Class,"public class Crop {
+    private String name;
+    private double yield;
+    private String type;
+    private String variety;
+    private String growthDuration;
+
+    public Crop(String name, double yield, String type, String variety, String growthDuration) {
+        this.name = name;
+        this.yield = yield;
+        this.type = type;
+        this.variety = variety;
+        this.growthDuration = growthDuration;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getYield() {
+        return yield;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getVariety() {
+        return variety;
+    }
+
+    public String getGrowthDuration() {
+        return growthDuration;
+    }
+}
+"
+God Class,"class PatientManagementSystem:
+    def __init__(self):
+        self.patients = []
+        self.appointments = []
+        self.medical_records = []
+        
+    def add_patient(self, patient):
+        self.patients.append(patient)
+
+    def schedule_appointment(self, patient_id, appointment_details):
+        self.appointments.append({'patient_id': patient_id, 'details': appointment_details})
+
+    def create_medical_record(self, patient_id, record_details):
+        self.medical_records.append({'patient_id': patient_id, 'record': record_details})
+
+    def get_patient_info(self, patient_id):
+        for patient in self.patients:
+            if patient.id == patient_id:
+                return patient
+        return None
+
+    def get_appointments(self, patient_id):
+        return [appointment for appointment in self.appointments if appointment['patient_id'] == patient_id]
+
+    def get_medical_records(self, patient_id):
+        return [record for record in self.medical_records if record['patient_id'] == patient_id]
+
+    def get_all_patients(self):
+        return self.patients
+
+    def notify_patient(self, patient_id, message):
+        # Logic to notify patient via SMS or email
+        pass
+
+    def generate_report(self):
+        # Logic to generate reports on patient health metrics
+        pass
+
+    def manage_insurance(self, patient_id, insurance_details):
+        # Logic to handle patient insurance data
+        pass
+
+    def manage_billing(self, patient_id, billing_info):
+        # Logic to process billing for the patient
+        pass
+
+    def check_lab_results(self, patient_id):
+        # Logic to check and return lab results for the patient
+        pass
+
+    def update_patient_info(self, patient_id, updated_info):
+        for patient in self.patients:
+            if patient.id == patient_id:
+                patient.update_info(updated_info)
+                break
+"
+Code Clone,"#include <iostream>
+#include <string>
+
+class Truck {
+public:
+    Truck(std::string id, double loadCapacity) : id(id), loadCapacity(loadCapacity) {}
+
+    void load(double amount) {
+        if (amount <= loadCapacity) {
+            currentLoad += amount;
+            std::cout << ""Loaded "" << amount << "" tons onto truck "" << id << "".\n"";
+        } else {
+            std::cout << ""Cannot load "" << amount << "" tons onto truck "" << id << "". Exceeds capacity.\n"";
+        }
+    }
+
+    void unload(double amount) {
+        if (amount <= currentLoad) {
+            currentLoad -= amount;
+            std::cout << ""Unloaded "" << amount << "" tons from truck "" << id << "".\n"";
+        } else {
+            std::cout << ""Cannot unload "" << amount << "" tons from truck "" << id << "". Not enough load.\n"";
+        }
+    }
+
+private:
+    std::string id;
+    double loadCapacity;
+    double currentLoad = 0.0;
+};
+
+class CargoVan {
+public:
+    CargoVan(std::string id, double loadCapacity) : id(id), loadCapacity(loadCapacity) {}
+
+    void load(double amount) {
+        if (amount <= loadCapacity) {
+            currentLoad += amount;
+            std::cout << ""Loaded "" << amount << "" tons onto cargo van "" << id << "".\n"";
+        } else {
+            std::cout << ""Cannot load "" << amount << "" tons onto cargo van "" << id << "". Exceeds capacity.\n"";
+        }
+    }
+
+    void unload(double amount) {
+        if (amount <= currentLoad) {
+            currentLoad -= amount;
+            std::cout << ""Unloaded "" << amount << "" tons from cargo van "" << id << "".\n"";
+        } else {
+            std::cout << ""Cannot unload "" << amount << "" tons from cargo van "" << id << "". Not enough load.\n"";
+        }
+    }
+
+private:
+    std::string id;
+    double loadCapacity;
+    double currentLoad = 0.0;
+};
+"
+Data Class,"public class EnergyConsumption {
+    private String consumerId;
+    private double kwhUsed;
+    private double cost;
+
+    public EnergyConsumption(String consumerId, double kwhUsed, double cost) {
+        this.consumerId = consumerId;
+        this.kwhUsed = kwhUsed;
+        this.cost = cost;
+    }
+
+    public String getConsumerId() {
+        return consumerId;
+    }
+
+    public double getKwhUsed() {
+        return kwhUsed;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+}
+"
+Code Clone,"class Car:
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+
+    def start_engine(self):
+        print(f""{self.year} {self.make} {self.model} engine started."")
+
+    def stop_engine(self):
+        print(f""{self.year} {self.make} {self.model} engine stopped."")
+
+    def drive(self):
+        print(f""{self.year} {self.make} {self.model} is now driving."")
+
+class Motorcycle:
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+
+    def start_engine(self):
+        print(f""{self.year} {self.make} {self.model} engine started."")
+
+    def stop_engine(self):
+        print(f""{self.year} {self.make} {self.model} engine stopped."")
+
+    def drive(self):
+        print(f""{self.year} {self.make} {self.model} is now driving."")
+"
+Feature Envy,"def calculate_customer_wealth(customer):
+    total_wealth = 0
+    for account in customer.get_accounts():
+        total_wealth += account.get_balance()
+        total_wealth += account.get_investments_value()
+    return total_wealth
+"
+God Class,"class FarmManagement:
+    def __init__(self):
+        self.animals = []
+        self.crops = []
+        self.equipment = []
+        self.employees = []
+        self.finances = {}
+
+    def add_animal(self, animal):
+        self.animals.append(animal)
+
+    def remove_animal(self, animal):
+        self.animals.remove(animal)
+
+    def add_crop(self, crop):
+        self.crops.append(crop)
+
+    def harvest_crop(self, crop):
+        if crop in self.crops:
+            self.crops.remove(crop)
+            # Simulate harvesting logic
+            return f""Harvested {crop}""
+
+    def add_equipment(self, equipment):
+        self.equipment.append(equipment)
+
+    def maintain_equipment(self, equipment):
+        if equipment in self.equipment:
+            # Simulate maintenance logic
+            return f""Maintained {equipment}""
+
+    def hire_employee(self, employee):
+        self.employees.append(employee)
+
+    def pay_employee(self, employee, amount):
+        if employee in self.employees:
+            self.finances[employee] = self.finances.get(employee, 0) + amount
+            return f""Paid {amount} to {employee}""
+
+    def get_financial_status(self):
+        total_expenses = sum(self.finances.values())
+        return f""Total expenses: {total_expenses}""
+
+    def manage_inventory(self):
+        # Logic to manage inventory of animals, crops, and equipment
+        return ""Managing inventory""
+
+    def plan_crop_rotation(self):
+        # Logic for planning crop rotation based on seasons
+        return ""Planning crop rotation""
+
+    def conduct_health_check(self):
+        # Logic to conduct health checks on animals
+        return ""Conducting health checks on animals""
+"
+God Class,"class VehicleManager {
+public:
+    void addVehicle(const std::string& vehicleType) {
+        // Logic to add a vehicle
+    }
+
+    void removeVehicle(int vehicleId) {
+        // Logic to remove a vehicle
+    }
+
+    void startVehicle(int vehicleId) {
+        // Logic to start the vehicle
+    }
+
+    void stopVehicle(int vehicleId) {
+        // Logic to stop the vehicle
+    }
+
+    void refuelVehicle(int vehicleId, float amount) {
+        // Logic to refuel the vehicle
+    }
+
+    void scheduleMaintenance(int vehicleId, const std::string& date) {
+        // Logic to schedule maintenance
+    }
+
+    void assignDriver(int vehicleId, const std::string& driverName) {
+        // Logic to assign a driver
+    }
+
+    void getVehicleStatus(int vehicleId) {
+        // Logic to get the status of the vehicle
+    }
+
+    void generateReport() {
+        // Logic to generate reports for all vehicles
+    }
+
+    void performSafetyCheck(int vehicleId) {
+        // Logic to perform a safety check
+    }
+
+    void updateGPS(int vehicleId, double latitude, double longitude) {
+        // Logic to update GPS location
+    }
+
+private:
+    std::vector<int> vehicles;
+};
+"
+Data Class,"class Student {
+public:
+    std::string name;
+    int age;
+    std::string studentId;
+    std::vector<std::string> courses;
+
+    Student(const std::string& name, int age, const std::string& studentId)
+        : name(name), age(age), studentId(studentId) {}
+
+    void enroll(const std::string& course) {
+        courses.push_back(course);
+    }
+
+    void withdraw(const std::string& course) {
+        courses.erase(std::remove(courses.begin(), courses.end(), course), courses.end());
+    }
+
+    void printDetails() const {
+        std::cout << ""Name: "" << name << "", Age: "" << age << "", Student ID: "" << studentId << "", Courses: "";
+        for (const auto& course : courses) {
+            std::cout << course << "" "";
+        }
+        std::cout << std::endl;
+    }
+};
+"
+Data Class,"class Product {
+public:
+    std::string name;
+    double price;
+    int stockQuantity;
+    std::string description;
+    std::string category;
+
+    Product(std::string name, double price, int stockQuantity, 
+            std::string description, std::string category)
+        : name(name), price(price), stockQuantity(stockQuantity),
+          description(description), category(category) {}
+
+    void applyDiscount(double percentage) {
+        price -= price * (percentage / 100);
+    }
+
+    void restock(int quantity) {
+        stockQuantity += quantity;
+    }
+
+    bool isAvailable() const {
+        return stockQuantity > 0;
+    }
+};
+"
+God Class,"class DeviceManager {
+    constructor() {
+        this.devices = [];
+    }
+
+    addDevice(device) {
+        this.devices.push(device);
+    }
+
+    removeDevice(deviceId) {
+        this.devices = this.devices.filter(d => d.id !== deviceId);
+    }
+
+    listDevices() {
+        return this.devices;
+    }
+
+    updateDevice(deviceId, newInfo) {
+        const device = this.devices.find(d => d.id === deviceId);
+        if (device) {
+            Object.assign(device, newInfo);
+        }
+    }
+
+    activateDevice(deviceId) {
+        const device = this.devices.find(d => d.id === deviceId);
+        if (device) {
+            device.active = true;
+        }
+    }
+
+    deactivateDevice(deviceId) {
+        const device = this.devices.find(d => d.id === deviceId);
+        if (device) {
+            device.active = false;
+        }
+    }
+
+    getDeviceStatus(deviceId) {
+        const device = this.devices.find(d => d.id === deviceId);
+        return device ? device.active : null;
+    }
+
+    // Networking
+    connectDevice(deviceId) {
+        // Logic to connect the device
+    }
+
+    disconnectDevice(deviceId) {
+        // Logic to disconnect the device
+    }
+
+    // Security management
+    authenticateDevice(deviceId, credentials) {
+        // Logic to authenticate device
+    }
+
+    revokeAccess(deviceId) {
+        // Logic to revoke access
+    }
+
+    // Logging
+    logDeviceActivity(deviceId, activity) {
+        // Logic to log activity
+    }
+
+    getDeviceLogs(deviceId) {
+        // Logic to retrieve logs
+    }
+}
+"
+Feature Envy,"void printBookingDetails(Booking &booking) {
+    std::cout << ""Guest Name: "" << booking.getGuest()->getName() << std::endl;
+    std::cout << ""Room Type: "" << booking.getRoom()->getType() << std::endl;
+    std::cout << ""Check-In Date: "" << booking.getCheckInDate() << std::endl;
+    std::cout << ""Check-Out Date: "" << booking.getCheckOutDate() << std::endl;
+    std::cout << ""Total Cost: "" << booking.getTotalCost() << std::endl;
+}
+"
+Long Parameter List,"function prescribeMedication(patientID, medicationName, dosage, frequency, startDate, endDate, notes, prescribingDoctorID, pharmacyID, insuranceDetails) {
+    // Prescribe the medication to the patient
+    const prescription = {
+        patientID: patientID,
+        medicationName: medicationName,
+        dosage: dosage,
+        frequency: frequency,
+        dates: {
+            start: startDate,
+            end: endDate
+        },
+        notes: notes,
+        prescribingDoctorID: prescribingDoctorID,
+        pharmacyID: pharmacyID,
+        insuranceDetails: insuranceDetails
+    };
+    // Save prescription to the database
+    database.savePrescription(prescription);
+}
+"
+Feature Envy,"calculateTotalOrderPrice(order) {
+    let total = 0;
+    order.items.forEach(item => {
+        total += item.price * item.quantity;
+        total += item.getTax(); // Feature Envy: accessing another object's method
+    });
+    return total;
+}
+"
+Long Method,"function processPatientData(patient) {
+    // Validate patient information
+    if (!patient.id || !patient.name || !patient.dateOfBirth) {
+        throw new Error(""Invalid patient information."");
+    }
+  
+    // Calculate age
+    const today = new Date();
+    const birthDate = new Date(patient.dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+  
+    // Determine insurance eligibility
+    let isEligibleForInsurance;
+    if (patient.insurance) {
+        isEligibleForInsurance = patient.insurance.status === 'active' && patient.insurance.expiryDate > today;
+    } else {
+        isEligibleForInsurance = false;
+    }
+  
+    // Record vital signs
+    const vitals = patient.vitalSigns;
+    let areVitalsNormal = true;
+    if (vitals) {
+        if (vitals.heartRate < 60 || vitals.heartRate > 100) {
+            areVitalsNormal = false;
+        }
+        if (vitals.bloodPressure.sys < 90 || vitals.bloodPressure.sys > 140 || vitals.bloodPressure.dia < 60 || vitals.bloodPressure.dia > 90) {
+            areVitalsNormal = false;
+        }
+        if (vitals.temperature < 97 || vitals.temperature > 99) {
+            areVitalsNormal = false;
+        }
+    }
+  
+    // Schedule follow-up appointments
+    if (age > 50 || !areVitalsNormal || !isEligibleForInsurance) {
+        console.log(`Scheduling follow-up for patient ID: ${patient.id}`);
+    }
+  
+    // Store processed patient data
+    const processedData = {
+        id: patient.id,
+        name: patient.name,
+        age: age,
+        insuranceEligibility: isEligibleForInsurance,
+        vitalsNormal: areVitalsNormal
+    };
+  
+    console.log(""Processed Patient Data: "", processedData);
+}
+"
+Feature Envy,"calculateCropYield(crop) {
+    const area = crop.getArea();
+    const expectedYieldPerAcre = crop.getExpectedYieldPerAcre();
+    return area * expectedYieldPerAcre;
+}
+"
+Long Method,"public void processManufacturingOrder(Order order) {
+    validateOrder(order);
+    calculateMaterialRequirements(order);
+    scheduleProduction(order);
+    allocateResources(order);
+    notifySuppliers(order);
+    executeProductionPlan(order);
+    monitorProductionProgress(order);
+    adjustScheduleAsNecessary(order);
+    conductQualityAssuranceChecks(order);
+    handlePostProductionTasks(order);
+    generateOrderCompletionReport(order);
+    updateInventory(order);
+    bill the customer(order);
+    archive order records(order);
+    notify stakeholders(order);
+}
+"
+God Class,"class EnergyManagementSystem {
+public:
+    void calculateEnergyConsumption() {
+        // Implementation for calculating energy consumption
+    }
+
+    void monitorEnergyUsage() {
+        // Implementation for monitoring energy usage
+    }
+
+    void generateEnergyReports() {
+        // Implementation for generating energy reports
+    }
+
+    void manageEnergySources() {
+        // Implementation for managing multiple energy sources
+    }
+
+    void executeEnergySavingsStrategies() {
+        // Implementation for executing various energy saving strategies
+    }
+
+    void trackRenewableEnergyIntegration() {
+        // Implementation for tracking renewable energy use
+    }
+
+    void optimizeEnergyDistribution() {
+        // Implementation for optimizing energy distribution
+    }
+
+    void alertEnergyThresholdExceeded() {
+        // Implementation for alerting when energy thresholds are exceeded
+    }
+
+    void maintainSystemHealth() {
+        // Implementation for maintaining system health and diagnostics
+    }
+
+    void coordinateWithUtilityProviders() {
+        // Implementation for coordinating with utility providers
+    }
+    
+    // Add more functionalities as needed...
+
+private:
+    // Private data members related to energy systems
+};
+"
+God Class,"public class PharmaManagementSystem {
+    private String companyName;
+    private List<String> drugs;
+    private List<String> employees;
+    private List<String> suppliers;
+    private List<String> patients;
+
+    public PharmaManagementSystem(String companyName) {
+        this.companyName = companyName;
+        this.drugs = new ArrayList<>();
+        this.employees = new ArrayList<>();
+        this.suppliers = new ArrayList<>();
+        this.patients = new ArrayList<>();
+    }
+
+    public void addDrug(String drug) {
+        drugs.add(drug);
+    }
+
+    public void removeDrug(String drug) {
+        drugs.remove(drug);
+    }
+
+    public void addEmployee(String employee) {
+        employees.add(employee);
+    }
+
+    public void removeEmployee(String employee) {
+        employees.remove(employee);
+    }
+
+    public void addSupplier(String supplier) {
+        suppliers.add(supplier);
+    }
+
+    public void removeSupplier(String supplier) {
+        suppliers.remove(supplier);
+    }
+
+    public void registerPatient(String patient) {
+        patients.add(patient);
+    }
+
+    public void dischargePatient(String patient) {
+        patients.remove(patient);
+    }
+
+    public List<String> listDrugs() {
+        return new ArrayList<>(drugs);
+    }
+
+    public List<String> listEmployees() {
+        return new ArrayList<>(employees);
+    }
+
+    public List<String> listSuppliers() {
+        return new ArrayList<>(suppliers);
+    }
+
+    public List<String> listPatients() {
+        return new ArrayList<>(patients);
+    }
+
+    public void generateReport() {
+        // Some complex logic to generate a report
+        System.out.println(""Generating report for "" + companyName);
+    }
+
+    public void monitorInventory() {
+        // Some complex logic to monitor inventory
+        System.out.println(""Monitoring inventory for drugs."");
+    }
+
+    public void manageFinances() {
+        // Some complex logic to manage finances
+        System.out.println(""Managing finances."");
+    }
+
+    public void handleCustomerQueries() {
+        // Some complex logic to handle customer queries
+        System.out.println(""Handling customer queries."");
+    }
+
+    public void conductResearch() {
+        // Some complex logic to conduct research
+        System.out.println(""Conducting research on new drugs."");
+    }
+}
+"
+Long Parameter List,"bookRoom(customerId, roomId, checkInDate, checkOutDate, paymentMethod, specialRequests, numberOfAdults, numberOfChildren, discountCode, breakfastIncluded) {
+    // method implementation
+}
+"
+Data Class,"class Beverage {
+public:
+    std::string name;
+    double volume;
+    double alcoholContent;
+
+    Beverage(const std::string& n, double v, double a) 
+        : name(n), volume(v), alcoholContent(a) {}
+    
+    void displayInfo() {
+        std::cout << ""Beverage Name: "" << name << std::endl;
+        std::cout << ""Volume: "" << volume << "" ml"" << std::endl;
+        std::cout << ""Alcohol Content: "" << alcoholContent << ""%"" << std::endl;
+    }
+};
+"
+God Class,"class PharmaceuticalManager {
+    constructor() {
+        this.drugs = [];
+        this.patients = [];
+        this.prescriptions = [];
+    }
+
+    addDrug(drug) {
+        this.drugs.push(drug);
+    }
+
+    removeDrug(drug) {
+        this.drugs = this.drugs.filter(d => d !== drug);
+    }
+
+    addPatient(patient) {
+        this.patients.push(patient);
+    }
+
+    removePatient(patient) {
+        this.patients = this.patients.filter(p => p !== patient);
+    }
+
+    prescribeDrug(patient, drug) {
+        if (this.patients.includes(patient) && this.drugs.includes(drug)) {
+            this.prescriptions.push({ patient, drug });
+        }
+    }
+
+    retrievePrescriptions(patient) {
+        return this.prescriptions.filter(p => p.patient === patient);
+    }
+
+    checkDrugAvailability(drug) {
+        return this.drugs.includes(drug);
+    }
+
+    listAllDrugs() {
+        return this.drugs;
+    }
+
+    getPatientDetails(patient) {
+        return this.patients.find(p => p === patient);
+    }
+
+    updatePatientDetails(patient, details) {
+        // Assume details is an object with values to be updated
+        // code to update patient details
+    }
+
+    handleInsuranceClaims(patient, details) {
+        // code to handle the insurance claims related to the patient
+    }
+
+    conductResearch(drug, researchData) {
+        // code to handle research related to the drug
+    }
+
+    generateReports() {
+        // code to generate reports about drugs and patients
+    }
+}
+"
+Code Clone,"class PatientRecord:
+    def __init__(self, patient_id, name, age, condition):
+        self.patient_id = patient_id
+        self.name = name
+        self.age = age
+        self.condition = condition
+
+    def display_info(self):
+        print(f""Patient ID: {self.patient_id}"")
+        print(f""Name: {self.name}"")
+        print(f""Age: {self.age}"")
+        print(f""Condition: {self.condition}"")
+
+    def update_condition(self, new_condition):
+        self.condition = new_condition
+        print(f""Updated Condition for {self.name}: {self.condition}"")
+
+class DoctorRecord:
+    def __init__(self, doctor_id, name, specialty, patients):
+        self.doctor_id = doctor_id
+        self.name = name
+        self.specialty = specialty
+        self.patients = patients
+
+    def display_info(self):
+        print(f""Doctor ID: {self.doctor_id}"")
+        print(f""Name: {self.name}"")
+        print(f""Specialty: {self.specialty}"")
+        print(f""Patients: {', '.join(patient.name for patient in self.patients)}"")
+    
+    def update_specialty(self, new_specialty):
+        self.specialty = new_specialty
+        print(f""Updated Specialty for Dr. {self.name}: {self.specialty}"")
+"
+Feature Envy,"public void printPatientSummary(Patient patient) {
+    System.out.println(""Patient Name: "" + patient.getName());
+    System.out.println(""Patient Age: "" + patient.getAge());
+    System.out.println(""Patient Medical History: "" + patient.getMedicalHistory());
+    System.out.println(""Current Medications: "" + patient.getCurrentMedications());
+    System.out.println(""Allergies: "" + patient.getAllergies());
+    System.out.println(""Emergency Contact: "" + patient.getEmergencyContact().getName() + "" - "" + patient.getEmergencyContact().getPhoneNumber());
+}
+"
+Feature Envy,"double calculateTotalShippingCost(const Order& order) {
+    double totalCost = 0.0;
+    for (const auto& item : order.getItems()) {
+        totalCost += item.getWeight() * ShippingRate::getRate(item.getDestination());
+    }
+    return totalCost + order.getHandlingFee();
+}
+"
+Feature Envy,"double calculateTotalPrice(const Property& property) {
+    double totalPrice = property.getBasePrice();
+    if (property.hasGarage()) {
+        totalPrice += property.getGaragePrice();
+    }
+    if (property.hasGarden()) {
+        totalPrice += property.getGardenPrice();
+    }
+    if (property.getLocation() == ""Premium"") {
+        totalPrice += property.getLocationPremium();
+    }
+    return totalPrice;
+}
+"
+Code Clone,"class Order:
+    def __init__(self, order_id, customer_name, items):
+        self.order_id = order_id
+        self.customer_name = customer_name
+        self.items = items
+    
+    def calculate_total(self):
+        total = 0
+        for item in self.items:
+            total += item['price'] * item['quantity']
+        return total
+    
+    def print_receipt(self):
+        print(f""Receipt for Order ID: {self.order_id}"")
+        print(f""Customer Name: {self.customer_name}"")
+        print(""Items:"")
+        for item in self.items:
+            print(f""{item['name']} - {item['quantity']} x ${item['price']:.2f}"")
+        print(f""Total: ${self.calculate_total():.2f}"")
+
+class ReturnOrder:
+    def __init__(self, return_id, customer_name, items):
+        self.return_id = return_id
+        self.customer_name = customer_name
+        self.items = items
+    
+    def calculate_total(self):
+        total = 0
+        for item in self.items:
+            total += item['price'] * item['quantity']
+        return total
+    
+    def print_receipt(self):
+        print(f""Return Receipt for Return ID: {self.return_id}"")
+        print(f""Customer Name: {self.customer_name}"")
+        print(""Items:"")
+        for item in self.items:
+            print(f""{item['name']} - {item['quantity']} x ${item['price']:.2f}"")
+        print(f""Total: ${self.calculate_total():.2f}"")
+"
+Feature Envy,"public double calculateTotalDistance(List<TransportationVehicle> vehicles) {
+    double totalDistance = 0;
+
+    for (TransportationVehicle vehicle : vehicles) {
+        totalDistance += vehicle.getTripDistance();
+        totalDistance += vehicle.getFuelConsumption() * vehicle.getEfficiency(); 
+    }
+
+    return totalDistance;
+}
+"
+Long Parameter List,"def create_patient_record(patient_id, first_name, last_name, date_of_birth, gender, address_line1, address_line2, city, state, postal_code, country, phone_number, email, allergies, medical_conditions, medications, insurance_provider, policy_number):
+    # Method implementation here
+    pass
+"
+Long Method,"public void processBooking(BookingRequest request) {
+    Customer customer = findCustomer(request.getCustomerId());
+    Room room = findRoom(request.getRoomId());
+    if (customer == null) {
+        throw new CustomerNotFoundException(""Customer not found"");
+    }
+    if (room == null || !room.isAvailable(request.getStartDate(), request.getEndDate())) {
+        throw new RoomNotAvailableException(""Room not available"");
+    }
+    
+    Reservation reservation = new Reservation(customer, room, request.getStartDate(), request.getEndDate());
+    paymentService.processPayment(request.getPaymentInfo());
+    reservation.setStatus(ReservationStatus.CONFIRMED);
+    
+    emailService.sendConfirmationEmail(customer.getEmail(), reservation);
+    
+    logBooking(reservation);
+    
+    if (request.getSpecialRequests() != null) {
+        for (String specialRequest : request.getSpecialRequests()) {
+            handleSpecialRequest(reservation, specialRequest);
+        }
+    }
+    
+    updateCustomerLoyaltyPoints(customer, room.getRate());
+    
+    // Additional logging
+    System.out.println(""Booking processed for customer: "" + customer.getId());
+    System.out.println(""Room booked: "" + room.getId());
+    System.out.println(""Start Date: "" + request.getStartDate());
+    System.out.println(""End Date: "" + request.getEndDate());
+    System.out.println(""Status: "" + reservation.getStatus());
+    
+    if (request.getAdditionalGuests() > 0) {
+        handleAdditionalGuests(reservation, request.getAdditionalGuests());
+    }
+    
+    if (request.getDiscountCode() != null) {
+        applyDiscount(reservation, request.getDiscountCode());
+    }
+    
+    saveReservation(reservation);
+}
+"
+Code Clone,"class Product {
+    constructor(name, price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    calculateDiscount(discount) {
+        return this.price - (this.price * (discount / 100));
+    }
+
+    calculateDiscountForVIP(discount) {
+        return this.price - (this.price * (discount / 100));
+    }
+
+    calculateDiscountForSeasonal(discount) {
+        return this.price - (this.price * (discount / 100));
+    }
+
+    displayProductInfo() {
+        return `${this.name}: $${this.price}`;
+    }
+
+    displayProductInfoForVIP() {
+        return `${this.name} (VIP): $${this.price}`;
+    }
+
+    displayProductInfoForSeasonal() {
+        return `${this.name} (Seasonal): $${this.price}`;
+    }
+}
+"
+Long Method,"void processOrder(const Order& order) {
+    // Validate order details
+    if (order.items.empty()) {
+        throw std::invalid_argument(""Order contains no items"");
+    }
+    if (order.customerId.empty()) {
+        throw std::invalid_argument(""Customer ID is required"");
+    }
+    
+    // Calculate total price
+    double totalPrice = 0.0;
+    for (const auto& item : order.items) {
+        totalPrice += item.price * item.quantity;
+    }
+
+    // Apply discounts
+    if (totalPrice > 100) {
+        totalPrice *= 0.9; // 10% discount for orders above $100
+    }
+
+    // Check inventory
+    for (const auto& item : order.items) {
+        if (!checkInventory(item.productId, item.quantity)) {
+            throw std::out_of_stock(""Product "" + item.productId + "" is out of stock"");
+        }
+    }
+
+    // Create shipping label
+    ShippingLabel label;
+    label.customerName = order.customerName;
+    label.address = order.shippingAddress;
+    label.totalPrice = totalPrice;
+
+    // Process payment
+    if (!processPayment(order.paymentDetails, totalPrice)) {
+        throw std::runtime_error(""Payment processing failed"");
+    }
+
+    // Update inventory
+    for (const auto& item : order.items) {
+        updateInventory(item.productId, item.quantity);
+    }
+
+    // Notify customer
+    sendConfirmationEmail(order.customerEmail, label);
+
+    // Log order
+    logOrder(order);
+}
+"
+Long Parameter List,"public void shipOrder(Long orderId, Long customerId, Long productId, Long warehouseId, Long shippingMethodId, Long trackingNumber, Long shippingCost, Long deliveryDate, Long recipientId) {
+    // Method implementation
+}
+"
+Code Clone,"public class ShoppingCart {
+    private List<Item> items;
+
+    public ShoppingCart() {
+        items = new ArrayList<>();
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
+    public double calculateTotal() {
+        double total = 0.0;
+        for (Item item : items) {
+            total += item.getPrice();
+        }
+        return total;
+    }
+
+    public void applyDiscount(double percentage) {
+        for (Item item : items) {
+            double discount = item.getPrice() * (percentage / 100);
+            item.setPrice(item.getPrice() - discount);
+        }
+    }
+
+    public void applyLoyaltyDiscount(double percentage) {
+        for (Item item : items) {
+            double discount = item.getPrice() * (percentage / 100);
+            item.setPrice(item.getPrice() - discount);
+        }
+    }
+
+    public void applySeasonalDiscount(double percentage) {
+        for (Item item : items) {
+            double discount = item.getPrice() * (percentage / 100);
+            item.setPrice(item.getPrice() - discount);
+        }
+    }
+}
+"
+Long Parameter List,"calculateInvestmentReturns(principal, rateOfReturn, years, contributionPerYear, inflationRate, taxRate, riskLevel, reinvestmentOption) {
+    let totalReturns = principal;
+    for (let i = 0; i < years; i++) {
+        totalReturns += contributionPerYear;
+        totalReturns *= (1 + (rateOfReturn - inflationRate - taxRate));
+    }
+    if (reinvestmentOption) {
+        totalReturns *= (1 + rateOfReturn);
+    }
+    return totalReturns;
+}
+"
+Data Class,"public class Student {
+    private String name;
+    private int age;
+    private String studentId;
+    private String email;
+    private String address;
+
+    public Student(String name, int age, String studentId, String email, String address) {
+        this.name = name;
+        this.age = age;
+        this.studentId = studentId;
+        this.email = email;
+        this.address = address;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+}
+"
+Feature Envy,"def calculate_total_energy_consumption(self):
+    total = 0
+    for appliance in self.appliances:
+        total += appliance.get_power_rating() * appliance.get_daily_usage_hours()
+    return total
+"
+Data Class,"public class Subscriber {
+    private String id;
+    private String name;
+    private String phoneNumber;
+    private String email;
+    private String address;
+
+    public Subscriber(String id, String name, String phoneNumber, String email, String address) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+}
+"
+God Class,"class RetailStore {
+public:
+    void manageInventory() {
+        // logic to manage inventory
+    }
+
+    void processSales() {
+        // logic to process sales
+    }
+
+    void handleCustomerService() {
+        // logic to handle customer service
+    }
+
+    void generateSalesReport() {
+        // logic to generate sales report
+    }
+
+    void manageEmployees() {
+        // logic to manage employees
+    }
+
+    void handleReturns() {
+        // logic to handle returns
+    }
+
+    void maintainWebsite() {
+        // logic to maintain e-commerce website
+    }
+
+    void conductMarketingCampaigns() {
+        // logic to conduct marketing campaigns
+    }
+
+    void analyzeMarketTrends() {
+        // logic to analyze market trends
+    }
+    
+    void manageFinancials() {
+        // logic to manage financial statements and budgets
+    }
+};
+"
+Feature Envy,"def calculate_shipping_cost(order, tax_rate):
+    total_weight = 0
+    for item in order.items:
+        total_weight += item.weight
+    shipping_cost = total_weight * order.shipping_rate
+    tax = shipping_cost * tax_rate
+    return shipping_cost + tax
+"
+Long Method,"public void processOrder(Order order) {
+    if (order == null) {
+        throw new IllegalArgumentException(""Order cannot be null"");
+    }
+    if (!isValidOrder(order)) {
+        throw new InvalidOrderException(""Order is not valid"");
+    }
+    
+    Customer customer = order.getCustomer();
+    if (customer == null) {
+        throw new IllegalArgumentException(""Customer cannot be null"");
+    }
+    
+    // Calculate total price
+    double totalPrice = 0;
+    for (Item item : order.getItems()) {
+        totalPrice += item.getPrice() * item.getQuantity();
+    }
+    
+    // Apply discounts
+    if (order.getDiscountCode() != null) {
+        totalPrice -= applyDiscount(order.getDiscountCode(), totalPrice);
+    }
+    
+    // Update inventory
+    for (Item item : order.getItems()) {
+        Inventory.updateStock(item.getId(), -item.getQuantity());
+    }
+    
+    // Process payment
+    PaymentProcessor processor = new PaymentProcessor();
+    if (!processor.processPayment(customer.getPaymentInfo(), totalPrice)) {
+        throw new PaymentException(""Payment processing failed"");
+    }
+    
+    // Send confirmation email
+    EmailService emailService = new EmailService();
+    emailService.sendOrderConfirmation(customer.getEmail(), order);
+    
+    // Log order details
+    Logger.log(""Order processed: "" + order.getId());
+    
+    // Create shipment
+    Shipment shipment = new Shipment();
+    shipment.setOrder(order);
+    shipment.setDestination(customer.getAddress());
+    ShipmentService.scheduleShipment(shipment);
+    
+    // Perform additional actions
+    notifyKitchen(order);
+    generateInvoice(order);
+    
+    // Update loyalty points
+    LoyaltyProgram.updatePoints(customer.getId(), totalPrice);
+    
+    // Notify staff
+    StaffNotifier.notifyStaff(order);
+    
+    // End of method execution
+}
+"
+Data Class,"public class Movie {
+    private String title;
+    private String director;
+    private int releaseYear;
+    private String genre;
+
+    public Movie(String title, String director, int releaseYear, String genre) {
+        this.title = title;
+        this.director = director;
+        this.releaseYear = releaseYear;
+        this.genre = genre;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+}
+"
+Long Parameter List,"def prepare_order(customer_name, order_number, item_name, quantity, special_instructions, delivery_address, payment_method, coupon_code, gift_wrap, expected_delivery_time):
+    # Logic to prepare the order
+    print(f""Preparing order for {customer_name}: Order #{order_number}"")
+    print(f""Item: {item_name}, Quantity: {quantity}, Special Instructions: {special_instructions}"")
+    print(f""Delivering to: {delivery_address}, Payment Method: {payment_method}"")
+    if coupon_code:
+        print(f""Applying coupon: {coupon_code}"")
+    if gift_wrap:
+        print(""Gift wrapping requested."")
+    print(f""Expected delivery time: {expected_delivery_time}"")
+"
+God Class,"public class TelecomBillingSystem {
+    private String customerName;
+    private String customerID;
+    private List<CallRecord> callRecords;
+    private List<Payment> payments;
+
+    public TelecomBillingSystem(String customerName, String customerID) {
+        this.customerName = customerName;
+        this.customerID = customerID;
+        this.callRecords = new ArrayList<>();
+        this.payments = new ArrayList<>();
+    }
+
+    public void addCallRecord(CallRecord record) {
+        callRecords.add(record);
+    }
+
+    public void addPayment(Payment payment) {
+        payments.add(payment);
+    }
+
+    public void generateBill() {
+        double totalAmount = calculateTotalAmount();
+        System.out.println(""Generating bill for "" + customerName + "": $"" + totalAmount);
+    }
+
+    private double calculateTotalAmount() {
+        double total = 0;
+        for (CallRecord record : callRecords) {
+            total += record.getCost();
+        }
+        for (Payment payment : payments) {
+            total -= payment.getAmount();
+        }
+        return total;
+    }
+
+    public void sendNotification(String message) {
+        System.out.println(""Sending notification to "" + customerName + "": "" + message);
+    }
+
+    public void updateCustomerDetails(String newName, String newID) {
+        this.customerName = newName;
+        this.customerID = newID;
+    }
+
+    public void retrieveCallHistory() {
+        System.out.println(""Call history for "" + customerName + "":"");
+        for (CallRecord record : callRecords) {
+            System.out.println(record);
+        }
+    }
+
+    public void applyDiscount(double discount) {
+        // Apply discount logic here
+        System.out.println(""Discount of $"" + discount + "" applied to "" + customerName);
+    }
+
+    public void calculateTaxes() {
+        // Tax calculation logic here
+        System.out.println(""Calculating taxes for "" + customerName);
+    }
+}
+
+class CallRecord {
+    private String callNumber;
+    private double cost;
+
+    public CallRecord(String callNumber, double cost) {
+        this.callNumber = callNumber;
+        this.cost = cost;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    @Override
+    public String toString() {
+        return ""Call to "" + callNumber + "" costing $"" + cost;
+    }
+}
+
+class Payment {
+    private double amount;
+
+    public Payment(double amount) {
+        this.amount = amount;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+}
+"
+Code Clone,"class User {
+public:
+    User(std::string name, int age) : name(name), age(age) {}
+    
+    void displayUserInfo() {
+        std::cout << ""User Name: "" << name << "", Age: "" << age << std::endl;
+    }
+
+private:
+    std::string name;
+    int age;
+};
+
+class Admin {
+public:
+    Admin(std::string name, int age, std::string role) : name(name), age(age), role(role) {}
+    
+    void displayAdminInfo() {
+        std::cout << ""Admin Name: "" << name << "", Age: "" << age << "", Role: "" << role << std::endl;
+    }
+
+private:
+    std::string name;
+    int age;
+    std::string role;
+};
+"
+Feature Envy,"double calculateTotalCharge(const Patient& patient) {
+    double totalCharge = 0;
+    totalCharge += patient.getConsultationFee();
+    totalCharge += patient.getLabFees();
+    totalCharge += patient.getMedicationCosts();
+    totalCharge += patient.getTreatmentFees();
+    totalCharge += patient.isInsured() ? -patient.getInsuranceDiscount() : 0;
+    return totalCharge;
+}
+"
+Data Class,"class PolicyHolder {
+public:
+    std::string name;
+    std::string address;
+    std::string phoneNumber;
+    std::string email;
+
+    PolicyHolder(const std::string& name, const std::string& address, 
+                 const std::string& phoneNumber, const std::string& email)
+        : name(name), address(address), phoneNumber(phoneNumber), email(email) {}
+
+    void printDetails() {
+        std::cout << ""Name: "" << name << "", Address: "" << address 
+                  << "", Phone: "" << phoneNumber << "", Email: "" << email << std::endl;
+    }
+};
+"
+Data Class,"class Transaction {
+    constructor(id, amount, date, description) {
+        this.id = id;
+        this.amount = amount;
+        this.date = date;
+        this.description = description;
+    }
+    
+    getId() {
+        return this.id;
+    }
+    
+    getAmount() {
+        return this.amount;
+    }
+    
+    getDate() {
+        return this.date;
+    }
+    
+    getDescription() {
+        return this.description;
+    }
+}
+"
+Code Clone,"class Beverage:
+    def __init__(self, name, volume, price):
+        self.name = name
+        self.volume = volume
+        self.price = price
+
+    def serve(self):
+        print(f""Serving {self.name}..."")
+
+    def calculate_total_cost(self, quantity):
+        return self.price * quantity
+
+class Juice(Beverage):
+    def __init__(self, name, volume, price, fruit_type):
+        super().__init__(name, volume, price)
+        self.fruit_type = fruit_type
+
+    def serve(self):
+        print(f""Pouring {self.volume}ml of {self.fruit_type} juice..."")
+
+    def calculate_total_cost(self, quantity):
+        return self.price * quantity * 1.1  # Extra 10% for juice
+
+class Soda(Beverage):
+    def __init__(self, name, volume, price, carbonation_level):
+        super().__init__(name, volume, price)
+        self.carbonation_level = carbonation_level
+
+    def serve(self):
+        print(f""Pouring {self.volume}ml of {self.name} soda with {self.carbonation_level} carbonation..."")
+
+    def calculate_total_cost(self, quantity):
+        return self.price * quantity * 1.05  # Extra 5% for soda
+"
